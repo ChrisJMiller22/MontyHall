@@ -148,7 +148,7 @@ def build_map(points, parcels, observations, instrument_setups):
         tiles=None,
     )
 
-    # Satellite layer — Esri serves tiles to zoom 23 in most urban/suburban areas
+    # Satellite — tiles exist to zoom 18 in rural NSW; upscale beyond that
     folium.TileLayer(
         tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
         attr='Esri World Imagery',
@@ -156,7 +156,7 @@ def build_map(points, parcels, observations, instrument_setups):
         overlay=False,
         control=True,
         max_zoom=22,
-        max_native_zoom=19,
+        max_native_zoom=18,
     ).add_to(m)
 
     folium.TileLayer(
