@@ -8,9 +8,10 @@ import os
 
 NS = {'lx': 'http://www.landxml.org/schema/LandXML-1.2'}
 
-# MGA2020 Zone 55 (EPSG:7856) -> WGS84 (EPSG:4326)
-# always_xy=True means input order is (easting, northing) -> (lon, lat)
-TRANSFORMER = Transformer.from_crs('EPSG:7856', 'EPSG:4326', always_xy=True)
+# GDA94 / MGA Zone 55 (EPSG:28355) -> WGS84 (EPSG:4326)
+# EPSG:7856 (GDA2020) has a bad central meridian in older pyproj databases;
+# GDA94 and GDA2020 differ by <5 cm in NSW so EPSG:28355 is correct here.
+TRANSFORMER = Transformer.from_crs('EPSG:28355', 'EPSG:4326', always_xy=True)
 
 COLOR_MAP = {
     'control':   '#e74c3c',
