@@ -144,19 +144,27 @@ def build_map(points, parcels, observations, instrument_setups):
     m = folium.Map(
         location=[centre_lat, centre_lon],
         zoom_start=18,
-        tiles='OpenStreetMap',
+        max_zoom=22,
+        tiles=None,
     )
 
-    # Satellite layer option
+    # Satellite layer — Esri serves tiles to zoom 23 in most urban/suburban areas
     folium.TileLayer(
         tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
         attr='Esri World Imagery',
         name='Satellite',
         overlay=False,
         control=True,
+        max_zoom=22,
+        max_native_zoom=19,
     ).add_to(m)
 
-    folium.TileLayer('OpenStreetMap', name='Street Map').add_to(m)
+    folium.TileLayer(
+        tiles='OpenStreetMap',
+        name='Street Map',
+        max_zoom=22,
+        max_native_zoom=19,
+    ).add_to(m)
 
     # --- Layer groups ---
     obs_layers = {
